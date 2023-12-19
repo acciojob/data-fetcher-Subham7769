@@ -15,7 +15,7 @@ const App = () => {
         setLoading(false);
       })
       .catch(e => {
-        setError(e.message);
+        setError('An error occurred: ');
         setLoading(false);
       });
   }
