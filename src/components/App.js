@@ -26,7 +26,8 @@ const App = () => {
         {/* Do not remove the main div */}
         <h1>Data Fetched from API</h1>
         {
-        <pre>{JSON.stringify(data,null,2)}</pre>
+               data &&  <pre>{JSON.stringify(data,null,2)}</pre> ||
+                  <pre>An error occurred: </pre>
         }
     </div>
   )
