@@ -14,7 +14,7 @@ const App = () => {
         setData(response);
         setLoading(false);
       })
-      .catch(e => {
+      .catch(() => {
         setError('An error occurred: ');
         setLoading(false);
       });
