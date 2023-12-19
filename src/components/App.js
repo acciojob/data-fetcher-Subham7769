@@ -1,23 +1,23 @@
-
 import React, { useEffect, useState } from "react";
 import './../styles/App.css';
 
-
 const App = () => {
-
-
   const [data , setData] = useState([]);
   const [loading , setLoading] = useState(false);
+  const [error , setError] = useState(false);
 
   function fetchData(){
-    setLoading(true)
+    setLoading(true);
     fetch('https://dummyjson.com/products')
       .then(response => response.json())
       .then(response => {
         setData(response);
-        setLoading(false)
+        setLoading(false);
       })
-      .catch(error => console.log(error));
+      .catch(e => {
+        setError(e.message);
+        setLoading(false);
+      });
   }
   
   useEffect(() => {
@@ -28,8 +28,21 @@ const App = () => {
     <div>
         {/* Do not remove the main div */}
         <h1>Data Fetched from API</h1>
-        {!loading &&  <pre>{JSON.stringify(data,null,2)}</pre>}
-        {!loading &&  <pre>An error occurred: </pre>}
+        {
+          loading && (
+            <pre>Loading...</pre>
+          )
+        }
+        {
+          !loading && (
+            <pre>{JSON.stringify(data, null, 2)}</pre>
+          )
+        }
+        {
+          !loading && (
+            <pre>{error}</pre>
+          )
+        }
     </div>
   )
 }
