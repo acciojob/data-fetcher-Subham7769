@@ -7,12 +7,15 @@ const App = () => {
 
 
   const [data , setData] = useState([]);
+  const [loading , setLoading] = useState(false);
 
   function fetchData(){
+    setLoading(true)
     fetch('https://dummyjson.com/products')
       .then(response => response.json())
       .then(response => {
         setData(response.products);
+        setLoading(false)
       })
       .catch(error => console.log(error));
   }
@@ -25,10 +28,8 @@ const App = () => {
     <div>
         {/* Do not remove the main div */}
         <h1>Data Fetched from API</h1>
-        {
-               data &&  <pre>{JSON.stringify(data,null,2)}</pre> ||
-                  <pre>An error occurred: </pre>
-        }
+        {!loading &&  <pre>{JSON.stringify(data,null,2)}</pre>}
+        {!loading &&  <pre>An error occurred: </pre>}
     </div>
   )
 }
